@@ -1,0 +1,289 @@
+<!-- Sidebar do HelpDesk -->
+<!-- Mobile backdrop -->
+<div *ngIf="isMobileSidebarOpen" class="fixed inset-0 z-40 lg:hidden" (click)="onBackdropClick()">
+  <div class="fixed inset-0 bg-gray-600 bg-opacity-75"></div>
+</div>
+
+<!-- Sidebar para desktop -->
+<aside
+  class="bg-white dark:bg-gray-800 w-64 min-h-screen shadow-sm border-r border-gray-200 dark:border-gray-700 hidden lg:block relative"
+>
+  <nav class="p-4 space-y-2 pb-32">
+    <!-- Dashboard -->
+    <a
+      routerLink="/dashboard"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      [class.bg-primary-50]="isActive('/dashboard')"
+      [class.text-primary-600]="isActive('/dashboard')"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      🏠
+      <span class="font-medium">Dashboard</span>
+    </a>
+
+    <!-- Tickets -->
+    <div class="space-y-1">
+      <a
+        routerLink="/tickets"
+        class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+        [class.bg-primary-50]="isActive('/tickets')"
+        [class.text-primary-600]="isActive('/tickets')"
+        routerLinkActive="bg-primary-50 text-primary-600"
+      >
+        🎫
+        <span class="font-medium">Tickets</span>
+        <span class="ml-auto bg-primary-100 text-primary-600 px-2 py-1 text-xs rounded-full">
+          {{ ticketCount }}
+        </span>
+      </a>
+
+      <!-- Submenu de Tickets -->
+      <div class="ml-8 space-y-1">
+        <a
+          routerLink="/tickets/all"
+          class="flex items-center space-x-3 px-3 py-1 text-sm text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-300"
+          routerLinkActive="bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+        >
+          Todos os Tickets
+        </a>
+        <a
+          routerLink="/tickets/mine"
+          class="flex items-center space-x-3 px-3 py-1 text-sm text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-300"
+          routerLinkActive="bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+        >
+          Meus Tickets
+        </a>
+        <a
+          routerLink="/tickets/unassigned"
+          class="flex items-center space-x-3 px-3 py-1 text-sm text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-300"
+          routerLinkActive="bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+        >
+          Não Atribuídos
+        </a>
+      </div>
+    </div>
+
+    <!-- Usuários -->
+    <a
+      routerLink="/users"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      [class.bg-primary-50]="isActive('/users')"
+      [class.text-primary-600]="isActive('/users')"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      👥
+      <span class="font-medium">Usuários</span>
+    </a>
+
+    <!-- Base de Conhecimento -->
+    <a
+      routerLink="/knowledge-base"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      [class.bg-primary-50]="isActive('/knowledge-base')"
+      [class.text-primary-600]="isActive('/knowledge-base')"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      📖
+      <span class="font-medium">Base de Conhecimento</span>
+    </a>
+
+    <!-- Relatórios -->
+    <a
+      routerLink="/reports"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      [class.bg-primary-50]="isActive('/reports')"
+      [class.text-primary-600]="isActive('/reports')"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      📊
+      <span class="font-medium">Relatórios</span>
+    </a>
+
+    <!-- Divider -->
+    <hr class="my-4 border-gray-200 dark:border-gray-600" />
+
+    <!-- Configurações -->
+    <a
+      routerLink="/settings"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      [class.bg-primary-50]="isActive('/settings')"
+      [class.text-primary-600]="isActive('/settings')"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      ⚙️
+      <span class="font-medium">Configurações</span>
+    </a>
+
+    <!-- Help -->
+    <a
+      routerLink="/help"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      ❓
+      <span class="font-medium">Ajuda</span>
+    </a>
+  </nav>
+
+  <!-- Footer do Sidebar -->
+  <div class="absolute bottom-4 left-4 right-4">
+    <div class="bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg p-4 text-white">
+      <div class="flex items-center space-x-3">
+        <div class="flex-shrink-0">⚡</div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium">Versão Pro</p>
+          <p class="text-xs text-primary-100">Recursos avançados</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- Sidebar para mobile -->
+<aside
+  *ngIf="isMobileSidebarOpen"
+  class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 shadow-xl border-r border-gray-200 dark:border-gray-700 lg:hidden transform transition-transform duration-300 ease-in-out"
+>
+  <!-- Header do sidebar mobile -->
+  <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+    <div class="flex items-center space-x-3">
+      <div class="flex items-center justify-center w-8 h-8 bg-primary-600 rounded-lg">🎧</div>
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-white">HelpDesk Pro</h2>
+    </div>
+    <button
+      type="button"
+      class="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+      (click)="closeMobileSidebar()"
+    >
+      ✕
+    </button>
+  </div>
+
+  <nav class="p-4 space-y-2 overflow-y-auto h-full pb-32">
+    <!-- Dashboard -->
+    <a
+      routerLink="/dashboard"
+      (click)="closeMobileSidebar()"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      🏠
+      <span class="font-medium">Dashboard</span>
+    </a>
+
+    <!-- Tickets -->
+    <div class="space-y-1">
+      <a
+        routerLink="/tickets"
+        (click)="closeMobileSidebar()"
+        class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+        routerLinkActive="bg-primary-50 text-primary-600"
+      >
+        🎫
+        <span class="font-medium">Tickets</span>
+        <span class="ml-auto bg-primary-100 text-primary-600 px-2 py-1 text-xs rounded-full">
+          {{ ticketCount }}
+        </span>
+      </a>
+
+      <!-- Submenu de Tickets -->
+      <div class="ml-8 space-y-1">
+        <a
+          routerLink="/tickets/all"
+          (click)="closeMobileSidebar()"
+          class="flex items-center space-x-3 px-3 py-1 text-sm text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-300"
+          routerLinkActive="bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+        >
+          Todos os Tickets
+        </a>
+        <a
+          routerLink="/tickets/mine"
+          (click)="closeMobileSidebar()"
+          class="flex items-center space-x-3 px-3 py-1 text-sm text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-300"
+          routerLinkActive="bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+        >
+          Meus Tickets
+        </a>
+        <a
+          routerLink="/tickets/unassigned"
+          (click)="closeMobileSidebar()"
+          class="flex items-center space-x-3 px-3 py-1 text-sm text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-300"
+          routerLinkActive="bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+        >
+          Não Atribuídos
+        </a>
+      </div>
+    </div>
+
+    <!-- Usuários -->
+    <a
+      routerLink="/users"
+      (click)="closeMobileSidebar()"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      👥
+      <span class="font-medium">Usuários</span>
+    </a>
+
+    <!-- Base de Conhecimento -->
+    <a
+      routerLink="/knowledge-base"
+      (click)="closeMobileSidebar()"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      📖
+      <span class="font-medium">Base de Conhecimento</span>
+    </a>
+
+    <!-- Relatórios -->
+    <a
+      routerLink="/reports"
+      (click)="closeMobileSidebar()"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      📊
+      <span class="font-medium">Relatórios</span>
+    </a>
+
+    <!-- Divider -->
+    <hr class="my-4 border-gray-200 dark:border-gray-600" />
+
+    <!-- Configurações -->
+    <a
+      routerLink="/settings"
+      (click)="closeMobileSidebar()"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      ⚙️
+      <span class="font-medium">Configurações</span>
+    </a>
+
+    <!-- Help -->
+    <a
+      routerLink="/help"
+      (click)="closeMobileSidebar()"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      ❓
+      <span class="font-medium">Ajuda</span>
+    </a>
+  </nav>
+
+  <!-- Footer do Sidebar Mobile -->
+  <div class="absolute bottom-4 left-4 right-4">
+    <div class="bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg p-4 text-white">
+      <div class="flex items-center space-x-3">
+        <div class="flex-shrink-0">⚡</div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium">Versão Pro</p>
+          <p class="text-xs text-primary-100">Recursos avançados</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
