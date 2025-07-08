@@ -1,0 +1,100 @@
+<!-- Header do HelpDesk -->
+<header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+  <div class="px-6 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo e Título -->
+      <div class="flex items-center space-x-4">
+        <button
+          type="button"
+          class="lg:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+          (click)="toggleSidebar()"
+        >
+          ☰
+        </button>
+
+        <div class="flex items-center space-x-3">
+          <div class="flex items-center justify-center w-8 h-8 bg-primary-600 rounded-lg">🎧</div>
+          <h1 class="text-xl font-semibold text-gray-900 dark:text-white">HelpDesk Pro</h1>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="hidden md:flex flex-1 max-w-lg mx-8">
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">🔍</div>
+          <input
+            type="text"
+            class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            placeholder="Buscar tickets, usuários..."
+            [(ngModel)]="searchTerm"
+            (keyup.enter)="onSearch()"
+          />
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center space-x-4">
+        <!-- Notifications -->
+        <button
+          type="button"
+          class="relative p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+          (click)="toggleNotifications()"
+        >
+          🔔
+          <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500"></span>
+        </button>
+
+        <!-- Dark Mode Toggle -->
+        <button
+          type="button"
+          class="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+          (click)="toggleDarkMode()"
+        >
+          {{ isDarkMode ? '☀️' : '🌙' }}
+        </button>
+
+        <!-- User Menu -->
+        <div class="relative">
+          <button
+            type="button"
+            class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            (click)="toggleUserMenu()"
+          >
+            <img class="h-8 w-8 rounded-full object-cover" [src]="currentUser.avatar" [alt]="currentUser.name" />
+            <span class="hidden lg:block text-sm font-medium text-gray-900 dark:text-white">
+              {{ currentUser.name }}
+            </span>
+            ▼
+          </button>
+
+          <!-- User Menu Dropdown -->
+          <div
+            *ngIf="showUserMenu"
+            class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700"
+          >
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              👤 Meu Perfil
+            </a>
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              ⚙️ Configurações
+            </a>
+            <hr class="my-1 border-gray-200 dark:border-gray-600" />
+            <a
+              href="#"
+              class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+              (click)="logout()"
+            >
+              🚪 Sair
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
