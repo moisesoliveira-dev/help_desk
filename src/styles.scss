@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+/* TailwindCSS Imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Custom CSS Variables for theming */
+:root {
+  --color-primary: 59 130 246;
+  --color-primary-dark: 29 78 216;
+  --color-success: 34 197 94;
+  --color-warning: 245 158 11;
+  --color-error: 239 68 68;
+  --color-gray: 107 114 128;
+}
+
+/* Dark mode variables */
+.dark {
+  --color-primary: 96 165 250;
+  --color-primary-dark: 59 130 246;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  line-height: 1.6;
+  color: rgb(55 65 81);
+  background-color: rgb(249 250 251);
+}
+
+.dark body {
+  color: rgb(229 231 235);
+  background-color: rgb(17 24 39);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(243 244 246);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(209 213 219);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(156 163 175);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgb(31 41 55);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgb(75 85 99);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgb(107 114 128);
+}
