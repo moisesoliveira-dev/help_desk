@@ -44,10 +44,13 @@
           <span class="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500"></span>
         </button>
 
-        <!-- Dark Mode Toggle -->
+        <!-- Theme Selector -->
+        <app-theme-selector></app-theme-selector>
+
+        <!-- Dark Mode Toggle (legacy - pode ser removido) -->
         <button
           type="button"
-          class="p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+          class="hidden p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           (click)="toggleDarkMode()"
         >
           {{ isDarkMode ? '☀️' : '🌙' }}
