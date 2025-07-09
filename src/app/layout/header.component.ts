@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SidebarService } from '../core/services/sidebar.service';
+import { ThemeSelectorComponent } from '../shared/theme-selector/theme-selector.component';
 
 interface User {
   id: string;
@@ -13,7 +14,7 @@ interface User {
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ThemeSelectorComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
