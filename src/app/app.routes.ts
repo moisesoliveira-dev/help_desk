@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './features/dashboard.component';
+import { ThemeShowcaseComponent } from './features/theme-showcase/theme-showcase.component';
 
 export const routes: Routes = [
     {
@@ -10,6 +11,10 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent
+    },
+    {
+        path: 'theme-showcase',
+        component: ThemeShowcaseComponent
     },
     {
         path: '**',
