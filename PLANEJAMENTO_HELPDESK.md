@@ -83,10 +83,10 @@ Este documento apresenta um planejamento estruturado para desenvolvimento de um 
 **📝 Commit:** `feat: implement auth guards and interceptors`
 
 #### 2.3 Serviços de Autenticação
-- [ ] AuthService para gerenciar autenticação
-- [ ] UserService para dados do usuário
-- [ ] TokenService para gerenciar tokens
-- [ ] LocalStorage/SessionStorage
+- [x] AuthService para gerenciar autenticação
+- [x] UserService para dados do usuário (integrado no AuthService)
+- [x] TokenService para gerenciar tokens (integrado no AuthService)
+- [x] LocalStorage/SessionStorage
 
 **📝 Commit:** `feat: create authentication services`
 
@@ -95,18 +95,18 @@ Este documento apresenta um planejamento estruturado para desenvolvimento de um 
 ### **FASE 3: Dashboard e Overview**
 
 #### 3.1 Dashboard Principal
-- [ ] Layout do dashboard
-- [ ] Cards de estatísticas
-- [ ] Gráficos de resumo (Chart.js/ng2-charts)
-- [ ] Indicadores de performance
+- [x] Layout do dashboard
+- [x] Cards de estatísticas
+- [x] Gráficos de resumo (widgets customizados)
+- [x] Indicadores de performance
 
 **📝 Commit:** `feat: implement main dashboard`
 
 #### 3.2 Widgets e Componentes
-- [ ] Widget de tickets recentes
-- [ ] Widget de atividades
-- [ ] Widget de notificações
-- [ ] Componentes reutilizáveis
+- [x] Widget de estatísticas reutilizável
+- [x] Widget de gráficos (bar, pie, line)
+- [x] Widget de tickets recentes
+- [x] Componentes reutilizáveis
 
 **📝 Commit:** `feat: add dashboard widgets`
 
