@@ -1,0 +1,79 @@
+/* Chart Widget Component Styles */
+
+:host {
+  display: block;
+}
+
+/* Chart animations */
+.chart-bar {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chart-bar:hover {
+  opacity: 0.8;
+}
+
+/* Line chart styles */
+.line-chart-container {
+  position: relative;
+}
+
+.chart-line {
+  transition: height 0.5s ease-out;
+}
+
+/* Legend styles */
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .chart-container {
+    padding: 1rem;
+  }
+
+  .chart-legend {
+    justify-content: center;
+  }
+}
+
+/* Loading state */
+.chart-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+:host-context(.dark) .chart-loading {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200% 100%;
+}
