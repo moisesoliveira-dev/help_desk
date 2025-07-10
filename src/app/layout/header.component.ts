@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { SidebarService } from '../core/services/sidebar.service';
 import { ThemeSelectorComponent } from '../shared/theme-selector/theme-selector.component';
 
@@ -14,7 +15,7 @@ interface User {
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, FormsModule, ThemeSelectorComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ThemeSelectorComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

@@ -58,9 +58,19 @@
 
         <!-- User Menu -->
         <div class="relative">
+          <!-- Login Link (temporário) -->
+          <a 
+            routerLink="/auth/login"
+            class="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-primary-50 dark:bg-primary-900/30 rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-colors"
+          >
+            <span>🔑</span>
+            <span class="hidden sm:inline">Fazer Login</span>
+          </a>
+
+          <!-- User Profile (oculto temporariamente) -->
           <button
             type="button"
-            class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            class="hidden items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
             (click)="toggleUserMenu()"
           >
             <img class="h-8 w-8 rounded-full object-cover" [src]="currentUser.avatar" [alt]="currentUser.name" />
