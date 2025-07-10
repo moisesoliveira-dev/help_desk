@@ -127,6 +127,19 @@
       <span class="ml-auto bg-warning-100 text-warning-700 px-2 py-0.5 text-xs rounded-full">DEV</span>
     </a>
 
+    <!-- Autenticação (Desenvolvimento) -->
+    <a
+      routerLink="/auth/login"
+      class="flex items-center space-x-3 px-3 py-2 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+      [class.bg-primary-50]="isActive('/auth')"
+      [class.text-primary-600]="isActive('/auth')"
+      routerLinkActive="bg-primary-50 text-primary-600"
+    >
+      🔐
+      <span class="font-medium">Autenticação</span>
+      <span class="ml-auto bg-blue-100 text-blue-700 px-2 py-0.5 text-xs rounded-full">DEV</span>
+    </a>
+
     <!-- Help -->
     <a
       routerLink="/help"
