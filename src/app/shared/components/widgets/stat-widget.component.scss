@@ -1,0 +1,37 @@
+/* Stat Widget Component Styles */
+
+:host {
+  display: block;
+}
+
+.trend-arrow {
+  display: inline-block;
+  margin-left: 0.25rem;
+}
+
+.trend-up::before {
+  content: '↗';
+}
+
+.trend-down::before {
+  content: '↘';
+}
+
+.trend-flat::before {
+  content: '→';
+}
+
+/* Hover effects */
+.stat-widget:hover {
+  transform: translateY(-1px);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Icon animation */
+.icon-container {
+  transition: transform 0.2s ease-in-out;
+}
+
+.stat-widget:hover .icon-container {
+  transform: scale(1.1);
+}
