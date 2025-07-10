@@ -1,17 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { SidebarService } from '../core/services/sidebar.service';
 import { ThemeSelectorComponent } from '../shared/theme-selector/theme-selector.component';
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
-  role: string;
-}
+import { AuthService } from '../core/services/auth.service';
+import { User } from '../core/models/auth.models';
 
 @Component({
   selector: 'app-header',
@@ -25,15 +19,15 @@ export class HeaderComponent implements OnInit {
   showUserMenu = false;
   showNotifications = false;
 
-  currentUser: User = {
-    id: '1',
-    name: 'João Silva',
-    email: 'joao.silva@helpdesk.com',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-    role: 'Administrador'
-  };
+  // Reactive computed properties from AuthService
+  isAuthenticated = computed(() => this.authService.isAuthenticated());
+  currentUser = computed(() => this.authService.currentUser());
 
-  constructor(private sidebarService: SidebarService) { }
+  constructor(
+    private sidebarService: SidebarService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     // Verificar tema salvo no localStorage
@@ -78,8 +72,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
-    console.log('Logout');
-    // TODO: Implementar logout
+    this.authService.logout();
+    this.showUserMenu = false;
+    this.router.navigate(['/auth/login']);
   }
 
   private applyTheme(): void {
