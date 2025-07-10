@@ -180,11 +180,11 @@ export class LoginComponent {
       this.errorMessage = '';
 
       const formValue = this.loginForm.value;
-      
+
       // Simulação de autenticação (posteriormente será conectado ao AuthService)
       setTimeout(() => {
         const { email, password } = formValue;
-        
+
         // Credenciais de demonstração
         const validCredentials = [
           { email: 'admin@helpdesk.com', password: 'admin123', role: 'admin' },
@@ -204,7 +204,7 @@ export class LoginComponent {
           // Credenciais inválidas
           this.errorMessage = 'E-mail ou senha incorretos. Verifique suas credenciais e tente novamente.';
         }
-        
+
         this.isLoading = false;
       }, 1500);
     } else {

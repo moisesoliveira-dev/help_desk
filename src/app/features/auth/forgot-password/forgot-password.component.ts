@@ -195,14 +195,14 @@ export class ForgotPasswordComponent {
       this.errorMessage = '';
 
       const email = this.forgotPasswordForm.value.email;
-      
+
       // Simulação de envio de e-mail (posteriormente será conectado ao AuthService)
       setTimeout(() => {
         // Simulação - sempre "envia" o e-mail por questões de segurança
         this.submittedEmail = email;
         this.emailSent = true;
         this.startResendTimer();
-        
+
         console.log('E-mail de recuperação enviado para:', email);
         this.isLoading = false;
       }, 1500);

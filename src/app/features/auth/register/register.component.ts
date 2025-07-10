@@ -11,7 +11,7 @@ import { ThemeSelectorComponent } from '../../../shared/theme-selector/theme-sel
 function passwordMatchValidator(control: AbstractControl) {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
-  
+
   if (password && confirmPassword && password.value !== confirmPassword.value) {
     return { passwordMismatch: true };
   }
@@ -21,18 +21,18 @@ function passwordMatchValidator(control: AbstractControl) {
 function strongPasswordValidator(control: AbstractControl) {
   const value = control.value;
   if (!value) return null;
-  
+
   const hasNumber = /[0-9]/.test(value);
   const hasUpper = /[A-Z]/.test(value);
   const hasLower = /[a-z]/.test(value);
   const hasSpecial = /[#?!@$%^&*-]/.test(value);
-  
+
   const valid = hasNumber && hasUpper && hasLower && hasSpecial && value.length >= 8;
-  
+
   if (!valid) {
     return { strongPassword: true };
   }
-  
+
   return null;
 }
 
@@ -282,7 +282,7 @@ export class RegisterComponent {
     if (!password) return 0;
 
     let strength = 0;
-    
+
     if (password.length >= 8) strength++;
     if (/[a-z]/.test(password)) strength++;
     if (/[A-Z]/.test(password)) strength++;
@@ -295,9 +295,9 @@ export class RegisterComponent {
   public getPasswordStrengthColor(index: number): string {
     const strength = this.getPasswordStrength();
     const baseClass = 'bg-gray-200 dark:bg-gray-600';
-    
+
     if (index >= strength) return baseClass;
-    
+
     if (strength <= 1) return 'bg-error-500';
     if (strength === 2) return 'bg-warning-500';
     if (strength === 3) return 'bg-warning-400';
@@ -325,24 +325,24 @@ export class RegisterComponent {
       this.successMessage = '';
 
       const formValue = this.registerForm.value;
-      
+
       // Simulação de registro (posteriormente será conectado ao AuthService)
       setTimeout(() => {
         // Simulação de verificação se e-mail já existe
         const existingEmails = ['admin@helpdesk.com', 'agent@helpdesk.com', 'user@helpdesk.com'];
-        
+
         if (existingEmails.includes(formValue.email)) {
           this.errorMessage = 'Este e-mail já está sendo usado. Escolha outro e-mail ou faça login.';
         } else {
           // Registro bem-sucedido
           this.successMessage = 'Conta criada com sucesso! Redirecionando para o login...';
           console.log('Registro realizado com sucesso:', formValue);
-          
+
           setTimeout(() => {
             this.router.navigate(['/auth/login']);
           }, 2000);
         }
-        
+
         this.isLoading = false;
       }, 1500);
     } else {
