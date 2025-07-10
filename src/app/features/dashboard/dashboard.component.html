@@ -1,0 +1,157 @@
+<!-- Dashboard Principal -->
+<div class="space-y-6">
+  <!-- Header do Dashboard -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+          Olá, {{ currentUser()?.firstName }}! Aqui está um resumo do seu helpdesk.
+        </p>
+      </div>
+      <div class="mt-4 sm:mt-0">
+        <button
+          type="button"
+          class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+        >
+          📊 Gerar Relatório
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards de Estatísticas -->
+  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <app-stat-widget
+      label="Total de Tickets"
+      [value]="stats.totalTickets"
+      icon="📋"
+      iconBgColor="#3B82F6"
+      trend="+12% este mês"
+      trendType="positive"
+    >
+    </app-stat-widget>
+
+    <app-stat-widget
+      label="Tickets Abertos"
+      [value]="stats.openTickets"
+      icon="🔴"
+      iconBgColor="#EF4444"
+      trend="-5% esta semana"
+      trendType="positive"
+    >
+    </app-stat-widget>
+
+    <app-stat-widget
+      label="Tickets Pendentes"
+      [value]="stats.pendingTickets"
+      icon="⏳"
+      iconBgColor="#F59E0B"
+      trend="2% este mês"
+      trendType="neutral"
+    >
+    </app-stat-widget>
+
+    <app-stat-widget
+      label="Satisfação"
+      [value]="stats.customerSatisfaction"
+      suffix="/5"
+      icon="⭐"
+      iconBgColor="#06D6A0"
+      trend="+0.2 pontos"
+      trendType="positive"
+    >
+    </app-stat-widget>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Gráfico de Tickets por Dia -->
+    <app-chart-widget title="Tickets por Dia" subtitle="Última Semana" type="line" [data]="ticketsByDay">
+    </app-chart-widget>
+
+    <!-- Gráfico de Status -->
+    <app-chart-widget title="Status dos Tickets" subtitle="Distribuição Atual" type="pie" [data]="ticketsByStatus">
+    </app-chart-widget>
+
+    <!-- Gráfico de Prioridade -->
+    <app-chart-widget title="Tickets por Prioridade" subtitle="Últimos 30 dias" type="bar" [data]="ticketsByPriority">
+    </app-chart-widget>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Tickets Recentes -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+      <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-medium text-gray-900 dark:text-white">Tickets Recentes</h3>
+          <a routerLink="/tickets" class="text-sm text-primary-600 hover:text-primary-500 dark:text-primary-400">
+            Ver todos
+          </a>
+        </div>
+      </div>
+      <div class="divide-y divide-gray-200 dark:divide-gray-700">
+        <div *ngFor="let ticket of recentTickets" class="p-6 hover:bg-gray-50 dark:hover:bg-gray-750 cursor-pointer">
+          <div class="flex items-center justify-between">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center space-x-3">
+                <span class="text-sm font-medium text-primary-600 dark:text-primary-400">
+                  {{ ticket.id }}
+                </span>
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                  [class]="getPriorityClass(ticket.priority)"
+                >
+                  {{ getPriorityLabel(ticket.priority) }}
+                </span>
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                  [class]="getStatusClass(ticket.status)"
+                >
+                  {{ getStatusLabel(ticket.status) }}
+                </span>
+              </div>
+              <p class="mt-1 text-sm font-medium text-gray-900 dark:text-white truncate">
+                {{ ticket.title }}
+              </p>
+              <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ ticket.user }} • {{ ticket.time }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Métricas Adicionais -->
+  <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+      <h3 class="text-lg font-medium text-gray-900 dark:text-white">Métricas de Performance</h3>
+    </div>
+    <div class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Tempo Médio de Resposta -->
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary-600 dark:text-primary-400">
+            {{ stats.avgResponseTime }}
+          </div>
+          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Tempo Médio de Resposta</div>
+        </div>
+
+        <!-- Taxa de Resolução -->
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-600 dark:text-green-400">
+            {{ ((stats.closedTickets / stats.totalTickets) * 100).toFixed(1) }}%
+          </div>
+          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Taxa de Resolução</div>
+        </div>
+
+        <!-- Tickets em Aberto -->
+        <div class="text-center">
+          <div class="text-3xl font-bold text-red-600 dark:text-red-400">
+            {{ (((stats.openTickets + stats.pendingTickets) / stats.totalTickets) * 100).toFixed(1) }}%
+          </div>
+          <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Tickets em Aberto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
