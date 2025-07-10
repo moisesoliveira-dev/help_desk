@@ -6,6 +6,8 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { InputComponent } from '../../../shared/components/input/input.component';
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { ThemeSelectorComponent } from '../../../shared/theme-selector/theme-selector.component';
+import { AuthService } from '../../../core/services/auth.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -137,6 +139,8 @@ import { ThemeSelectorComponent } from '../../../shared/theme-selector/theme-sel
 export class LoginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private authService = inject(AuthService);
+  private notificationService = inject(NotificationService);
 
   public loginForm: FormGroup;
   public isLoading = false;
@@ -149,6 +153,11 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false]
     });
+
+    // Reatividade ao estado de loading do AuthService
+    this.authService.loading.set = (loading: boolean) => {
+      this.isLoading = loading;
+    };
   }
 
   public getFieldError(fieldName: string): string {
@@ -173,40 +182,31 @@ export class LoginComponent {
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
-
   public onSubmit(): void {
     if (this.loginForm.valid) {
-      this.isLoading = true;
       this.errorMessage = '';
-
       const formValue = this.loginForm.value;
 
-      // Simulação de autenticação (posteriormente será conectado ao AuthService)
-      setTimeout(() => {
-        const { email, password } = formValue;
+      this.authService.login({
+        email: formValue.email,
+        password: formValue.password,
+        rememberMe: formValue.rememberMe
+      }).subscribe({
+        next: (response) => {
+          this.notificationService.success(
+            'Login realizado com sucesso!',
+            `Bem-vindo, ${response.user.firstName}!`
+          );
 
-        // Credenciais de demonstração
-        const validCredentials = [
-          { email: 'admin@helpdesk.com', password: 'admin123', role: 'admin' },
-          { email: 'agent@helpdesk.com', password: 'agent123', role: 'agent' },
-          { email: 'user@helpdesk.com', password: 'user123', role: 'user' }
-        ];
-
-        const validUser = validCredentials.find(
-          cred => cred.email === email && cred.password === password
-        );
-
-        if (validUser) {
-          // Login bem-sucedido
-          console.log('Login realizado com sucesso:', formValue);
-          this.router.navigate(['/dashboard']);
-        } else {
-          // Credenciais inválidas
-          this.errorMessage = 'E-mail ou senha incorretos. Verifique suas credenciais e tente novamente.';
+          // Redireciona para a URL original ou dashboard
+          const redirectUrl = this.authService.getAndClearRedirectUrl() || '/dashboard';
+          this.router.navigate([redirectUrl]);
+        },
+        error: (error) => {
+          this.errorMessage = error.message || 'Erro ao fazer login. Tente novamente.';
+          this.notificationService.error('Erro no login', this.errorMessage);
         }
-
-        this.isLoading = false;
-      }, 1500);
+      });
     } else {
       // Marca todos os campos como tocados para mostrar erros
       Object.keys(this.loginForm.controls).forEach(key => {
