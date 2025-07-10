@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './features/dashboard.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ThemeShowcaseComponent } from './features/theme-showcase/theme-showcase.component';
 import { AuthLayoutComponent } from './features/auth/auth-layout.component';
 import { LoginComponent } from './features/auth/login/login.component';
