@@ -1,0 +1,100 @@
+/* Dashboard Component Styles */
+
+/* Custom hover effects for cards */
+.stat-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Progress bar animations */
+.progress-bar {
+  transition: all 0.5s ease-out;
+}
+
+/* Ticket item hover effects */
+.ticket-item {
+  transition: background-color 0.15s ease-in-out;
+}
+
+.ticket-item:hover {
+  background-color: rgba(249, 250, 251, 1);
+}
+
+:host-context(.dark) .ticket-item:hover {
+  background-color: rgba(55, 65, 81, 1);
+}
+
+/* Custom scrollbar for ticket list */
+.ticket-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(156 163 175) transparent;
+}
+
+.ticket-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ticket-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ticket-list::-webkit-scrollbar-thumb {
+  background-color: rgb(156 163 175);
+  border-radius: 3px;
+}
+
+.ticket-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(107 114 128);
+}
+
+/* Badge animations */
+.badge {
+  transition: background-color 0.15s ease-in-out;
+}
+
+/* Chart container */
+.chart-container {
+  position: relative;
+  min-height: 200px;
+}
+
+/* Loading states */
+.loading-shimmer {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: rgb(229 231 235);
+  border-radius: 0.375rem;
+}
+
+:host-context(.dark) .loading-shimmer {
+  background-color: rgb(55 65 81);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .stat-card {
+    transform: none;
+  }
+
+  .stat-card:hover {
+    transform: none;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
