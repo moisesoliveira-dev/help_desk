@@ -67,18 +67,18 @@ Este documento apresenta um planejamento estruturado para desenvolvimento de um 
 ### **FASE 2: Autenticação e Autorização**
 
 #### 2.1 Telas de Autenticação
-- [ ] Página de login
-- [ ] Página de registro
-- [ ] Página de recuperação de senha
-- [ ] Validações de formulário
+- [x] Página de login
+- [x] Página de registro
+- [x] Página de recuperação de senha
+- [x] Validações de formulário
 
 **📝 Commit:** `feat: create authentication pages`
 
 #### 2.2 Guards e Interceptors
-- [ ] AuthGuard para proteção de rotas
-- [ ] AuthInterceptor para requisições
-- [ ] Redirecionamentos automáticos
-- [ ] Tratamento de tokens
+- [x] AuthGuard para proteção de rotas
+- [x] AuthInterceptor para requisições
+- [x] Redirecionamentos automáticos
+- [x] Tratamento de tokens
 
 **📝 Commit:** `feat: implement auth guards and interceptors`
 
