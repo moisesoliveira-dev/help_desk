@@ -5,6 +5,7 @@ import { AuthLayoutComponent } from './features/auth/auth-layout.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { ForgotPasswordComponent } from './features/auth/forgot-password/forgot-password.component';
+import { TicketListComponent } from './features/ticket-list/ticket-list.component';
 import { authGuard, noAuthGuard, roleGuard, adminGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -57,11 +58,9 @@ export const routes: Routes = [
     },
     {
         path: 'tickets',
+        component: TicketListComponent,
         canActivate: [authGuard],
         data: { roles: ['admin', 'agent', 'user'] }, // Todos os usuários autenticados
-        children: [
-            // Rotas de tickets serão adicionadas aqui
-        ]
     },
     {
         path: 'users',
