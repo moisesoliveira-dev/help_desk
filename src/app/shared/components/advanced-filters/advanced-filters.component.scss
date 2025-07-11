@@ -1,0 +1,89 @@
+/* Advanced Filters Component Styles */
+
+:host {
+  display: block;
+}
+
+/* Filter input animations */
+.filter-input {
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-input:focus {
+  transform: scale(1.02);
+}
+
+/* Active filter badges */
+.filter-badge {
+  transition: all 0.15s ease-in-out;
+}
+
+.filter-badge:hover {
+  transform: scale(1.05);
+}
+
+/* Quick filter buttons */
+.quick-filter-btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.quick-filter-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Range inputs */
+.range-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .range-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Loading state */
+.filters-loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Custom scrollbar for filter list */
+.filter-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.filter-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filter-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filter-list::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.filter-list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(107, 114, 128, 0.7);
+}
