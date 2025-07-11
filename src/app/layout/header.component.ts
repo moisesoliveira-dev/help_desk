@@ -1,20 +1,20 @@
-import { Component, OnInit, inject, computed } from '@angular/core';
+import { Component, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { SidebarService } from '../core/services/sidebar.service';
 import { ThemeSelectorComponent } from '../shared/theme-selector/theme-selector.component';
+import { GlobalSearchComponent } from '../shared/components/global-search/global-search.component';
 import { AuthService } from '../core/services/auth.service';
 import { User } from '../core/models/auth.models';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, FormsModule, RouterLink, ThemeSelectorComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ThemeSelectorComponent, GlobalSearchComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-  searchTerm = '';
   isDarkMode = false;
   showUserMenu = false;
   showNotifications = false;
@@ -46,13 +46,6 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar(): void {
     this.sidebarService.toggleMobileMenu();
-  }
-
-  onSearch(): void {
-    if (this.searchTerm.trim()) {
-      console.log('Searching for:', this.searchTerm);
-      // TODO: Implementar busca
-    }
   }
 
   toggleNotifications(): void {
