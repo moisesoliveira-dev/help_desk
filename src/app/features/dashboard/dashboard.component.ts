@@ -2,8 +2,10 @@ import { Component, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { SearchService } from '../../core/services/search.service';
 import { StatWidgetComponent } from '../../shared/components/widgets/stat-widget.component';
 import { ChartWidgetComponent } from '../../shared/components/widgets/chart-widget.component';
+import { AdvancedFiltersComponent } from '../../shared/components/advanced-filters/advanced-filters.component';
 
 interface DashboardStats {
     totalTickets: number;
@@ -16,11 +18,14 @@ interface DashboardStats {
 
 @Component({
     selector: 'app-dashboard',
-    imports: [CommonModule, RouterLink, StatWidgetComponent, ChartWidgetComponent],
+    imports: [CommonModule, RouterLink, StatWidgetComponent, ChartWidgetComponent, AdvancedFiltersComponent],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
+    // Estado dos filtros
+    showAdvancedFilters = false;
+
     // Dados estatísticos simulados
     stats: DashboardStats = {
         totalTickets: 1847,
@@ -94,7 +99,10 @@ export class DashboardComponent implements OnInit {
     currentUser = computed(() => this.authService.currentUser());
     userRole = computed(() => this.currentUser()?.role);
 
-    constructor(private authService: AuthService) { }
+    constructor(
+        private authService: AuthService,
+        private searchService: SearchService
+    ) { }
 
     ngOnInit(): void {
         // Simula carregamento de dados
@@ -142,5 +150,14 @@ export class DashboardComponent implements OnInit {
             low: 'Baixa'
         };
         return labels[priority as keyof typeof labels] || priority;
+    }
+
+    toggleAdvancedFilters(): void {
+        this.showAdvancedFilters = !this.showAdvancedFilters;
+    }
+
+    onFiltersChange(): void {
+        // Atualizar dados baseado nos filtros
+        this.loadDashboardData();
     }
 }
