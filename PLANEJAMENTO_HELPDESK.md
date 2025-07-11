@@ -111,10 +111,10 @@ Este documento apresenta um planejamento estruturado para desenvolvimento de um 
 **📝 Commit:** `feat: add dashboard widgets`
 
 #### 3.3 Filtros e Pesquisa
-- [ ] Barra de pesquisa global
-- [ ] Filtros avançados
-- [ ] Ordenação e paginação
-- [ ] Persistência de filtros
+- [x] Barra de pesquisa global
+- [x] Filtros avançados
+- [x] Ordenação e paginação
+- [x] Persistência de filtros
 
 **📝 Commit:** `feat: implement search and filters`
 
